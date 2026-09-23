@@ -1,0 +1,76 @@
+export const TEMPLATE_SPECS = {
+  PAGA: {
+    label: 'BOTB PAGA',
+    meta: { project: 'BOTB TELECOM', documentNo: '2270-8540-80-O002-0010-STARTER', revision: 'A', title: 'IN-PLANT VOICE PAGING SYSTEM - SOURCE-BASED STARTER', sourceRefs: ['PAGA-BOTB', 'PAGA-SRU4'] },
+    zones: [
+      { id: 'zone-control', label: 'CONTROL / TELECOM ROOM', x: 70, y: 80, width: 610, height: 540 },
+      { id: 'zone-field', label: 'FIELD DISTRIBUTION', x: 730, y: 80, width: 850, height: 540 },
+    ],
+    nodes: [
+      ['MC-A', 'PRESET-S.2.1', 'PAGA MAIN CABINET A', 170, 180],
+      ['MC-B', 'PRESET-S.2.1', 'PAGA MAIN CABINET B', 430, 180],
+      ['OAP', 'PRESET-S.2.4', 'OPERATOR ACCESS PANEL', 300, 340],
+      ['JB-A', 'PRESET-S.2.10', 'DISTRIBUTION JB - A', 790, 180],
+      ['JB-B', 'PRESET-S.2.10', 'DISTRIBUTION JB - B', 790, 400],
+      ['SPK-A', 'PRESET-S.2.8', 'WP HORN SPEAKERS - A', 1080, 180],
+      ['SPK-B', 'PRESET-S.2.8', 'WP HORN SPEAKERS - B', 1080, 400],
+      ['HSS', 'PRESET-S.2.13', 'INTERCOM / HSS', 1360, 180],
+      ['BCN', 'PRESET-S.2.16', 'FLASHING BEACON', 1360, 400],
+    ],
+    edges: [
+      ['P-A1', 'MC-A', 'JB-A', 'GROUP A CIRCUIT', 'Speaker Cable', 'PAGA', '#15803d'],
+      ['P-A2', 'JB-A', 'SPK-A', 'GROUP A FIELD', 'Speaker Cable', 'PAGA', '#15803d'],
+      ['P-B1', 'MC-B', 'JB-B', 'GROUP B CIRCUIT', 'Speaker Cable', 'PAGA', '#0f766e'],
+      ['P-B2', 'JB-B', 'SPK-B', 'GROUP B FIELD', 'Speaker Cable', 'PAGA', '#0f766e'],
+      ['P-OAP', 'OAP', 'MC-A', 'OPERATOR INTERFACE', 'Vendor / LAN Cable', 'Operator Interface', '#2563eb'],
+      ['P-HSS', 'MC-A', 'HSS', 'INTERCOM CIRCUIT', 'Intercom Cable', 'Handset / Intercom', '#ea580c'],
+      ['P-BCN', 'MC-B', 'BCN', 'BEACON CIRCUIT', 'Beacon Cable', 'Visual Alarm', '#dc2626'],
+    ],
+  },
+  PCCTV: {
+    label: 'PCCTV',
+    meta: { project: 'BOTB TELECOM', documentNo: '2270-8540-80-O002-0013-STARTER', revision: 'A', title: 'PROCESS CCTV - SOURCE-BASED STARTER', sourceRefs: ['PCCTV'] },
+    zones: [
+      { id: 'zone-ccr', label: 'CCR / SECURITY / TELECOM ROOM', x: 70, y: 80, width: 640, height: 540 },
+      { id: 'zone-cctv-field', label: 'PROCESS CCTV FIELD', x: 760, y: 80, width: 820, height: 540 },
+    ],
+    nodes: [
+      ['MAIN', 'PRESET-S.10.1', 'CCTV MAIN CABINET', 170, 220],
+      ['SRV', 'PRESET-S.10.16', 'VMS / CCTV SERVERS', 430, 180],
+      ['WS', 'PRESET-S.10.4', 'CCTV WORKSTATION', 430, 390],
+      ['CAB', 'PRESET-S.8.3', 'FIELD CCTV / PoE CABINET', 860, 290],
+      ['FIX', 'PRESET-S.8.5', 'FIXED IP CAMERAS', 1180, 180],
+      ['PTZ', 'PRESET-S.10.11', 'PTZ IP CAMERAS', 1180, 390],
+    ],
+    edges: [
+      ['C-FIX', 'FIX', 'CAB', 'CAT6 / PoE', 'CAT6 / PoE', 'CCTV', '#15803d'],
+      ['C-PTZ', 'PTZ', 'CAB', 'CAT6 / PoE', 'CAT6 / PoE', 'CCTV', '#15803d'],
+      ['C-FO', 'CAB', 'MAIN', 'FIBER UPLINK', 'Fiber Optic', 'CCTV Backbone', '#2563eb'],
+      ['C-SRV', 'MAIN', 'SRV', 'CCTV LAN', 'Ethernet', 'Video Management', '#2563eb'],
+      ['C-WS', 'SRV', 'WS', 'CLIENT / VMS LAN', 'Ethernet', 'Monitoring', '#2563eb'],
+    ],
+  },
+  ITVOICE: {
+    label: 'IT / Voice',
+    meta: { project: 'BOTB TELECOM', documentNo: '2270-8540-80-O002-0015-STARTER', revision: 'A', title: 'IT / VOICE NETWORK - SOURCE-BASED STARTER', sourceRefs: ['IPTEL-DATA', 'IT-FOC-1', 'IT-FOC-2'] },
+    zones: [
+      { id: 'zone-core', label: 'MAIN TELECOM / CORE', x: 70, y: 80, width: 680, height: 540 },
+      { id: 'zone-dist', label: 'BUILDING / DISTRIBUTION', x: 800, y: 80, width: 780, height: 540 },
+    ],
+    nodes: [
+      ['FOPP', 'PRESET-S.1.1.1.9.2', '48-PORT FIBER PATCH PANEL', 170, 220],
+      ['CORE', null, 'CORE / AGGREGATION SWITCH', 460, 220],
+      ['ACC', 'PRESET-S.1.1.1.3.1', '24-PORT ACCESS SWITCH', 900, 220],
+      ['UPP', 'PRESET-S.1.1.1.10.1', '24-PORT UTP PATCH PANEL', 1190, 220],
+      ['GW', 'PRESET-S.1.2.5', 'VoIP GATEWAY', 900, 420],
+      ['PHONE', 'PRESET-S.1.2.1', 'VoIP TELEPHONES', 1190, 420],
+    ],
+    edges: [
+      ['I-FO', 'FOPP', 'CORE', 'FIBER BACKBONE', 'Fiber Optic', 'IT / Voice', '#2563eb'],
+      ['I-UP', 'CORE', 'ACC', 'DISTRIBUTION UPLINK', 'Fiber / Ethernet', 'Data Network', '#2563eb'],
+      ['I-PP', 'ACC', 'UPP', 'HORIZONTAL LAN', 'CAT6A', 'Structured Cabling', '#15803d'],
+      ['I-TEL', 'UPP', 'PHONE', 'VoIP OUTLETS', 'CAT6A', 'Telephone', '#15803d'],
+      ['I-GW', 'ACC', 'GW', 'VoIP GATEWAY LAN', 'Ethernet', 'Telephone', '#ea580c'],
+    ],
+  },
+};

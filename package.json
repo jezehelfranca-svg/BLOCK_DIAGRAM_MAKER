@@ -1,0 +1,23 @@
+{
+  "name": "block-diagram-maker-react-flow",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "extract-presets": "node scripts/extract-presets.mjs",
+    "predev": "npm run extract-presets",
+    "dev": "vite",
+    "prebuild": "npm run extract-presets",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@xyflow/react": "12.11.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.1",
+    "vite": "8.3.0"
+  }
+}
