@@ -9,7 +9,8 @@
     "dev": "vite",
     "prebuild": "npm run extract-presets",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:offline": "npm run build && node scripts/make-offline-bundle.mjs"
   },
   "dependencies": {
     "@xyflow/react": "12.11.6",
