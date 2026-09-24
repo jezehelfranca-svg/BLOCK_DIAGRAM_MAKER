@@ -220,6 +220,16 @@ export default function App() {
     window.addEventListener('keydown', handler); return () => window.removeEventListener('keydown', handler);
   }, [restoreHistory]);
 
+  const onSelectionChange = useCallback(({ nodes: selectedNodes, edges: selectedEdges }) => {
+    const next = selectedNodes[0]
+      ? { kind: 'node', id: selectedNodes[0].id }
+      : selectedEdges[0]
+        ? { kind: 'edge', id: selectedEdges[0].id }
+        : null;
+    // Return the previous object when nothing actually changed: React Flow re-runs this
+    // handler on every render, so handing back a fresh object would re-render forever.
+    setSelection((prev) => (prev?.kind === next?.kind && prev?.id === next?.id) ? prev : next);
+  }, []);
   const onNodesChange = useCallback((changes) => setNodes((prev) => applyNodeChanges(changes, prev)), []);
   const onEdgesChange = useCallback((changes) => setEdges((prev) => applyEdgeChanges(changes, prev)), []);
   const onConnect = useCallback((connection) => {
@@ -284,7 +294,7 @@ export default function App() {
           <ReactFlow
             nodes={nodes} edges={edges} nodeTypes={nodeTypes}
             onNodesChange={onNodesChange} onEdgesChange={onEdgesChange} onConnect={onConnect}
-            onSelectionChange={({ nodes: selectedNodes, edges: selectedEdges }) => setSelection(selectedNodes[0] ? { kind: 'node', id: selectedNodes[0].id } : selectedEdges[0] ? { kind: 'edge', id: selectedEdges[0].id } : null)}
+            onSelectionChange={onSelectionChange}
             connectionMode={ConnectionMode.Loose}
             selectionOnDrag panOnDrag={[1, 2]} multiSelectionKeyCode="Shift" deleteKeyCode={['Backspace', 'Delete']}
             snapToGrid snapGrid={[20, 20]} fitView fitViewOptions={{ padding: 0.16 }}
